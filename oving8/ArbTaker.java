@@ -77,7 +77,7 @@ public class ArbTaker {
         return aar - yearHired;
     }
 
-    public boolean harVaertAnsattMerEnn(int antallAar) {
+    public boolean hiredMoreThan (int antallAar) {
         return getYearAnsatt() > antallAar;
     }
 

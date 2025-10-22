@@ -14,37 +14,87 @@ import java.util.Scanner;
 public class Client {
 
     public static void main(String[] args) {
-        Scanner inn = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         // Les inn persondata
         System.out.print("Fornavn: ");
-        String firstName = inn.nextLine();
+        String firstName = scanner.nextLine();
         System.out.print("Etternavn: ");
-        String lastName = inn.nextLine();
+        String lastName = scanner.nextLine();
         System.out.print("Fødselsår: ");
-        int birthYear = inn.nextInt();
+        int birthYear = scanner.nextInt();
 
         Person person = new Person(firstName, lastName, birthYear);
 
         // Les inn arbeidsdata
         System.out.print("Arbeidstakernr: ");
-        int arbtakernr = inn.nextInt();
+        int arbtakernr = scanner.nextInt();
         System.out.print("Ansettelsesår: ");
-        int yearHired = inn.nextInt();
+        int yearHired = scanner.nextInt();
         System.out.print("Månedslønn: ");
-        double monthlySalary = inn.nextDouble();
+        double monthlySalary = scanner.nextDouble();
         System.out.print("Skatteprosent: ");
-        double taxPercentage = inn.nextDouble();
+        double taxPercentage = scanner.nextDouble();
 
         ArbTaker arb = new ArbTaker(person, arbtakernr, yearHired, monthlySalary, taxPercentage);
 
-        // Vis informasjon
-        System.out.println("\n" + arb.toString());
-        System.out.println("\nSkattetrekk per måned: " + arb.getSkattetrekkPerMaaned() + " kr");
-        System.out.println("Bruttolønn per år: " + arb.getBruttolonnPerAar() + " kr");
-        System.out.println("Skattetrekk per år: " + arb.getSkattetrekkPerAar() + " kr");
+        boolean fortsett = true;
 
-        inn.close();
+        while (fortsett) {
+            // Meny
+            System.out.println(
+                    "\nHva vil du gjøre?:\n" +
+                            "1: Hvor mange kroner arbeidstakeren trekkes i skatt per måned\n" +
+                            "2: Bruttolønn per år\n" +
+                            "3: Skattetrekk per år\n" +
+                            "4: Navn\n" +
+                            "5: Alder\n" +
+                            "6: Antall år ansatt i bedriften\n" +
+                            "7: Om personen har vært ansatt mer enn et gitt antall år\n" +
+                            "8: Avslutt program"
+            );
+
+            int valg = scanner.nextInt();
+
+            switch (valg) {
+                case 1:
+                    System.out.println("\nx:\n");
+                    break;
+                case 2:
+                    System.out.println("\nx:\n");
+                    break;
+                case 3:
+                    System.out.println("\nx");
+                    break;
+                case 4:
+                    System.out.print("x:");
+                    break;
+                case 5:
+                    System.out.println("\nx:\n");
+                    break;
+                case 6:
+                    System.out.println("\nx:\n");
+                    break;
+                case 7:
+                    System.out.println("\nSkriv inn antall år for å sjekke om person har vært ansatt lengre enn dette:\n");
+                    int antallAar = scanner.nextInt();
+                    if (arb.hiredMoreThan(antallAar)) {
+                    System.out.println("Ja");
+                    }
+                    else {
+                        System.out.println("Nei");
+                    }
+                    break;
+                case 8:
+                    fortsett = false;
+                    System.out.println("Avslutter...");
+                    continue;
+                default:
+                    System.out.println("Ugyldig valg, prøv igjen.");
+                    continue;
+            }
+        }
+        scanner.close();
     }
 }
 
