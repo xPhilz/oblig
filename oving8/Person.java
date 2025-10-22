@@ -7,53 +7,39 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Person {
+    private final String firstName;
+    private final String lastName;
+    private final int birthYear;
 
-    private String firstName;
-    private String lastName;
-    private int birthYear;
-
-    // Attributter fornavn, etternavn og fødselsår
-
-    // Constructor
     public Person(String firstName, String lastName, int birthYear) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthYear = birthYear;
     }
 
-    // Get firstName
     public String getFirstName() {
         return firstName;
     }
 
-    // Get lastName
     public String getLastName() {
         return lastName;
     }
 
-    // Get birthYear
     public int getBirthYear() {
         return birthYear;
     }
 
-    // Set firstName
-    public String setFirstName(String firstName) {
-        this.firstName = firstName;
+    public int getAge() {
+        java.util.GregorianCalendar kalender = new java.util.GregorianCalendar();
+        int aar = kalender.get(java.util.Calendar.YEAR);
+        return aar - birthYear;
     }
 
-    // Set lastName
-    public String setLastName (String lastName) {
-        this.lastName = lastName;
-    }
-
-    // Set birthYear
-    public int setBirthYear (int birthYear) {
-        this.birthYear = birthYear;
-    }
-
-    // toString for print
-    public String toString() {
+    public String getNavn() {
         return lastName + ", " + firstName;
     }
 
+    public String toString() {
+        return getNavn() + ", født " + birthYear + " (" + getAge() + " år)";
+    }
 }

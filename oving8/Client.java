@@ -12,67 +12,39 @@ import java.util.Scanner;
 
 // Client
 public class Client {
+
     public static void main(String[] args) {
+        Scanner inn = new Scanner(System.in);
 
-        // Konstruktørkalling
-        ArbTaker mod2 = new ArbTaker(firstName, lastName, monthlySalary);
+        // Les inn persondata
+        System.out.print("Fornavn: ");
+        String firstName = inn.nextLine();
+        System.out.print("Etternavn: ");
+        String lastName = inn.nextLine();
+        System.out.print("Fødselsår: ");
+        int birthYear = inn.nextInt();
 
-        // Scanner for menyvalg
-        Scanner in = new Scanner(System.in);
+        Person person = new Person(firstName, lastName, birthYear);
 
-        boolean fortsett = true;
+        // Les inn arbeidsdata
+        System.out.print("Arbeidstakernr: ");
+        int arbtakernr = inn.nextInt();
+        System.out.print("Ansettelsesår: ");
+        int yearHired = inn.nextInt();
+        System.out.print("Månedslønn: ");
+        double monthlySalary = inn.nextDouble();
+        System.out.print("Skatteprosent: ");
+        double taxPercentage = inn.nextDouble();
 
-        while (fortsett) {
-            // Meny
-            System.out.println(
-                    "\nHva vil du gjøre?:\n" +
-                            "1: Se arbeidstaker informasjon\n" +
-                            "2: x\n" +
-                            "3: x\n" +
-                            "4: x\n" +
-                            "5: x\n" +
-                            "6: x\n" +
-                            "7: Avslutt program"
-            );
+        ArbTaker arb = new ArbTaker(person, arbtakernr, yearHired, monthlySalary, taxPercentage);
 
-            int valg = in.nextInt();
+        // Vis informasjon
+        System.out.println("\n" + arb.toString());
+        System.out.println("\nSkattetrekk per måned: " + arb.getSkattetrekkPerMaaned() + " kr");
+        System.out.println("Bruttolønn per år: " + arb.getBruttolonnPerAar() + " kr");
+        System.out.println("Skattetrekk per år: " + arb.getSkattetrekkPerAar() + " kr");
 
-            // Switch case for meny for å velge hva som printes ut
-            switch (valg) {
-                case 1:
-                    System.out.println("\nInformasjon om arbeidstaker:\n" + get.ArbTaker() + "\n" + get.ArbTaker);
-                    break;
-                case 2:
-                    System.out.println("\nx\n" + x());
-                    break;
-                case 3:
-                    System.out.println("\nx\n" + x());
-                    break;
-                case 4:
-                    System.out.print("x");
-                    String x = scanner.nextLine();
-                    System.out.print("x");
-                    String x = scanner.nextLine();
-                    modified.x(x, x);
-                    System.out.println("x");
-                    System.out.println("\nx\n" + modified.x(x, x));
-                    break;
-                case 5:
-                    System.out.println("\nx\n" + modified.x());
-                    break;
-                case 6:
-                    System.out.println("\nx\n" + modified.x());
-                    break;
-                case 7:
-                    fortsett = false;
-                    System.out.println("Avslutter...");
-                    continue;
-                default:
-                    System.out.println("Ugyldig valg, prøv igjen.");
-                    continue;
-            }
-        }
-        scanner.close();
+        inn.close();
     }
 }
 

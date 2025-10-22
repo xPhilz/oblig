@@ -6,53 +6,86 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ArbTaker extends Person {
-
-    // datatype Person
-    // int arbTakerNr;
-    // int yearJoined;
+public class ArbTaker {
+    private Person personalia;
+    private final int arbtakernr;
+    private final int yearHired;
     private double monthlySalary;
-    // double taxPercentage;
+    private double skatteprosent;
 
-    // Attributter personalia (datatype Person), arbtakernr
-    // ansettelsesår, månedslønn og skatteprosent.
-
-    // Constructor
-    public ArbTaker(String firstName, String lastName, double monthlySalary) {
-        super(firstName, lastName);
-        // this.yearJoined = yearJoined;
+    public ArbTaker(Person personalia, int arbtakernr, int yearHired,
+                    double monthlySalary, double skatteprosent) {
+        this.personalia = personalia;
+        this.arbtakernr = arbtakernr;
+        this.yearHired = yearHired;
         this.monthlySalary = monthlySalary;
-        // this.taxPercentage = taxPercentage;
+        this.skatteprosent = skatteprosent;
     }
 
-    // Get yearJoined
-    /* public int getYearJoined() {
-        return yearJoined;
-    }*/
+    public Person getPersonalia() {
+        return personalia;
+    }
 
-    // Get monthlySalary
-    public double getMonthlySalary() {
+    public int getArbtakernr() {
+        return arbtakernr;
+    }
+
+    public int getAnsettelsesaar() {
+        return yearHired;
+    }
+
+    public double getMaanedslonn() {
         return monthlySalary;
     }
 
-    // Get taxPercentage
-    /* public double getTaxPercentage() {
-        return taxPercentage;
-    } */
-
-    // Get taxKroner
-    /* public double getTaxKroner() {
-        return (taxPercentage * monthlySalary);
-    } */
-
-    // Set monthlySalary
-    public double setMonthlySalary() {
-        this.monthlySalary = monthlySalary;
+    public double getSkatteprosent() {
+        return skatteprosent;
     }
 
-    // Set taxPercentage
-    /* public double setTaxPercentage() {
-        double taxPercentage = setTaxPercentage();
-        return taxPercentage;
-    } */
+    public void setMaanedslonn(double nyMaanedslonn) {
+        this.monthlySalary = nyMaanedslonn;
+    }
+
+    public void setSkatteprosent(double nySkatteprosent) {
+        this.skatteprosent = nySkatteprosent;
+    }
+
+    public double getSkattetrekkPerMaaned() {
+        return monthlySalary * (skatteprosent / 100);
+    }
+
+    public double getBruttolonnPerAar() {
+        return monthlySalary * 12;
+    }
+
+    public double getSkattetrekkPerAar() {
+        // 10 måneder full skatt + desember halv skatt (juni skattefri)
+        return getSkattetrekkPerMaaned() * 10.5;
+    }
+
+    public String getNavn() {
+        return personalia.getNavn();
+    }
+
+    public int getAlder() {
+        return personalia.getAge();
+    }
+
+    public int getYearAnsatt() {
+        java.util.GregorianCalendar kalender = new java.util.GregorianCalendar();
+        int aar = kalender.get(java.util.Calendar.YEAR);
+        return aar - yearHired;
+    }
+
+    public boolean harVaertAnsattMerEnn(int antallAar) {
+        return getYearAnsatt() > antallAar;
+    }
+
+    public String toString() {
+        return "Arbeidstaker: " + getNavn() + "\n" +
+                "Arbtakernr: " + arbtakernr + "\n" +
+                "Ansatt: " + yearHired + " (" + getYearAnsatt() + " år)\n" +
+                "Månedslønn: " + monthlySalary + " kr\n" +
+                "Skatt: " + skatteprosent + "%";
+    }
 }
